@@ -12,11 +12,17 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/polling_db';
 
+const allowedOrigins = [
+    process.env.CORS_ORIGIN,
+    'https://intervue-io-sand.vercel.app',
+    'http://localhost:5173'
+].filter(Boolean) as string[];
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+        origin: allowedOrigins,
         methods: ['GET', 'POST'],
         credentials: true
     }
