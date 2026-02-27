@@ -1,11 +1,11 @@
 .student-poll-outer {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 3rem 1rem 5rem;
+    padding: 2rem 1rem;
     position: relative;
+    box-sizing: border-box;
 }
 
 .student-poll-container {
@@ -344,9 +344,8 @@
     background: #595959;
     padding: 1.2rem 1.5rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 1rem;
 }
 
 .poll-question-text {

@@ -3,11 +3,9 @@ import type { PollState } from '../types/poll';
 
 interface PollResultCardProps {
     poll: PollState;
-    /** Optional timer badge to show in the dark header */
-    timerBadge?: React.ReactNode;
 }
 
-const PollResultCard: React.FC<PollResultCardProps> = ({ poll, timerBadge }) => {
+const PollResultCard: React.FC<PollResultCardProps> = ({ poll }) => {
     const options = poll?.options || [];
     const totalVotes = options.reduce((sum, opt) => sum + (opt.votes || 0), 0);
 
@@ -15,7 +13,6 @@ const PollResultCard: React.FC<PollResultCardProps> = ({ poll, timerBadge }) => 
         <div className="poll-result-container">
             <div className="poll-question-dark-box">
                 <h2 className="poll-question-text">{poll.question}</h2>
-                {timerBadge}
             </div>
 
             <div className="poll-options-box">

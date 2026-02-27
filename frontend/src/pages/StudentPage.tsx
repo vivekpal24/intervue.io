@@ -6,6 +6,7 @@ import type { PollState, Participant } from '../types/poll';
 import PollResultCard from '../components/PollResultCard';
 import SidebarPopover from '../components/SidebarPopover';
 import HeaderBadge from '../components/HeaderBadge';
+import PollHeader from '../components/PollHeader';
 import './StudentPage.css';
 
 const StudentPage: React.FC = () => {
@@ -153,7 +154,7 @@ const StudentPage: React.FC = () => {
     if (!isJoined) {
         if (isKicked) {
             return (
-                <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+                <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
                     <HeaderBadge className="mb-4" />
                     <h1 className="page-title mb-4" style={{ fontSize: '2rem', color: '#1A1A1A', fontWeight: 500 }}>
                         <span style={{ fontWeight: 400 }}>You've been</span> Kicked out !
@@ -166,7 +167,7 @@ const StudentPage: React.FC = () => {
         }
 
         return (
-            <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+            <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <HeaderBadge className="mb-4" />
                 <h1 className="page-title text-center">Welcome to the Live Polling System</h1>
                 <p className="page-description text-center mb-4">Please enter your name below to continue.</p>
@@ -187,29 +188,25 @@ const StudentPage: React.FC = () => {
     return (
         <div className="student-poll-outer">
             <div className="student-poll-container">
+                <div className="text-center mb-4">
+                    <HeaderBadge />
+                </div>
                 {errorMsg && <div className="error-alert">{errorMsg}</div>}
 
                 {/* ── Waiting Screen ── */}
                 {(!activePoll || (activePoll.status !== 'ACTIVE' && activePoll.status !== 'COMPLETED')) ? (
-                    <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+                    <div className="page-container text-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
                         <div className="spinner-border mb-4" style={{ width: '3rem', height: '3rem', border: '4px solid #6366F1', borderRightColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                         <h2 style={{ fontSize: '1.5rem', color: '#1A1A1A', fontWeight: '500' }}>Wait for the teacher to ask a question.</h2>
                     </div>
                 ) : (
                     <>
-                        {/* Question header row */}
-                        <div className="student-poll-header mb-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', marginLeft: '0.2rem' }}>
-                            <h3 className="poll-section-label" style={{ margin: 0, color: '#1A1A1A', fontSize: '1.3rem', fontWeight: 800 }}>Question 1</h3>
-                            {!showResults && (
-                                <div className={`countdown-text ${timeLeftMs < 10000 ? 'danger-pulse-text' : ''}`} style={{ fontWeight: 700, color: timeLeftMs < 10000 ? '#ef4444' : '#1A1A1A', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    {formattedTime}
-                                </div>
-                            )}
-                        </div>
+                        <PollHeader
+                            label="Question 1"
+                            timeLeftMs={timeLeftMs}
+                            formattedTime={formattedTime}
+                            showTimer={!showResults}
+                        />
 
                         {showResults ? (
                             // Results view — reuse PollResultCard

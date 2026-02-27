@@ -9,6 +9,7 @@ import PollHistoryView from '../components/PollHistoryView';
 import ViewHistoryButton from '../components/ViewHistoryButton';
 import SidebarPopover from '../components/SidebarPopover';
 import HeaderBadge from '../components/HeaderBadge';
+import PollHeader from '../components/PollHeader';
 import './TeacherPage.css';
 
 const TeacherPage: React.FC = () => {
@@ -168,11 +169,7 @@ const TeacherPage: React.FC = () => {
         socket.emit('teacher:unkickStudent', { studentName });
     };
 
-    const timerBadge = activePoll?.status === 'ACTIVE' ? (
-        <div className={`countdown-badge small ${timeLeftMs < 10000 ? 'danger-pulse' : ''}`}>
-            ⏱️ {formattedTime}
-        </div>
-    ) : undefined;
+    const timerActive = activePoll?.status === 'ACTIVE';
 
     return (
         <>
@@ -216,8 +213,13 @@ const TeacherPage: React.FC = () => {
                                     </div>
                                 )}
 
-                                <h3 className="poll-section-label">Question</h3>
-                                <PollResultCard poll={activePoll} timerBadge={timerBadge} />
+                                <PollHeader
+                                    label="Question"
+                                    timeLeftMs={timeLeftMs}
+                                    formattedTime={formattedTime}
+                                    showTimer={timerActive}
+                                />
+                                <PollResultCard poll={activePoll} />
 
                                 <div className="admin-actions mt-4" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                     <button onClick={handleCreateNewPoll} className="btn-primary pill-large">
