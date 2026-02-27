@@ -13,13 +13,18 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes(origin)) {
+
+        // Normalize origin for comparison
+        const normalizedOrigin = origin.replace(/\/$/, '');
+        const isAllowed = allowedOrigins.some(ao => ao && ao.replace(/\/$/, '') === normalizedOrigin);
+
+        if (isAllowed) {
             callback(null, true);
         } else {
-            console.warn(`Origin ${origin} not allowed by CORS`);
-            callback(new Error('Not allowed by CORS'));
+            console.warn(`[CORS] Origin rejected: ${origin}. Allowed: ${allowedOrigins.join(', ')}`);
+            // Avoid throwing a hard error which might break the pipeline; just return false to block
+            callback(null, false);
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -30,7 +35,7 @@ app.use(express.json());
 
 // Diagnostic middleware
 app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log(`[${new Date().toISOString()}] Incoming: ${req.method} ${req.url} from ${req.headers.origin || 'no-origin'}`);
     next();
 });
 
@@ -38,7 +43,17 @@ app.use('/poll', pollRoutes);
 app.use('/vote', voteRoutes);
 
 app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'healthy' });
+    res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
+// Catch-all 404 handler (specifically with CORS context)
+app.use((req, res) => {
+    console.warn(`[404] No route found for: ${req.method} ${req.url}`);
+    res.status(404).json({
+        error: 'Resource not found',
+        path: req.url,
+        method: req.method
+    });
 });
 
 export default app;

@@ -34,6 +34,7 @@ async function start() {
     await connectDB(mongoUri);
 
     try {
+        console.log(`[Startup] Allowed CORS Origins:`, allowedOrigins);
         await Participant.deleteMany({});
         console.log('Cleared lingering participant records from previous session.');
         await pollService.recoverActivePolls();
