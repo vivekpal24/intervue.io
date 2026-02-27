@@ -1,0 +1,174 @@
+/* Sidebar Tabs / Popover Panel */
+.popover-panel {
+    position: fixed;
+    bottom: 95px;
+    /* Above the FAB */
+    right: 30px;
+    width: 380px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.popover-panel.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.popover-panel.closed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+.popover-tabs {
+    display: flex;
+    border-bottom: 1px solid #E9ECEF;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 1rem 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+.close-sidebar-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.popover-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-sidebar);
+}
+
+.chat-body .chat-panel {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    height: 100%;
+}
+
+.participants-table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem 0.5rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    background: white;
+}
+
+.participants-list {
+    background: white;
+    flex: 1;
+}
+
+.participant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #F8F9FA;
+}
+
+.participant-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.kick-btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #3B82F6;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Floating action button */
+.fab-chat {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px var(--accent-glow);
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fab-chat.open {
+    box-shadow: 0 0 0 4px rgba(96, 91, 255, 0.2);
+}
+
+.fab-chat:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .popover-panel {
+        width: 100%;
+        height: 60vh;
+        bottom: 0;
+        right: 0;
+        border-radius: 20px 20px 0 0;
+        position: fixed;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+
+    .fab-chat {
+        bottom: 20px;
+        right: 20px;
+    }
+}

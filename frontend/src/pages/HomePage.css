@@ -1,0 +1,120 @@
+.home-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-main);
+    /* usually #F2F2F2 */
+    padding: 2rem;
+}
+
+.home-content {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.content-inner {
+    max-width: 664px;
+    /* 320px * 2 + 24px gap */
+    margin: 0 auto;
+    width: 100%;
+}
+
+.home-title {
+    font-size: 2.25rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.home-title strong {
+    font-weight: 800;
+}
+
+.home-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    line-height: 1.5;
+}
+
+.role-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 600px) {
+    .role-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.role-card {
+    flex: 1;
+    width: 100%;
+    max-width: 320px;
+    background: #FFFFFF;
+    border: 1.5px solid #E9ECEF;
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.role-card:hover {
+    border-color: #D9D9D9;
+}
+
+.role-card.selected {
+    border: 2.5px solid var(--accent-primary);
+    background: rgba(79, 13, 206, 0.03);
+}
+
+.role-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.role-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.continue-btn {
+    padding: 0.8rem 4rem;
+    border-radius: 30px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .home-wrapper {
+        padding: 1rem;
+    }
+
+    .home-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .home-title {
+        font-size: 1.75rem;
+    }
+
+    .role-cards {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .role-card {
+        max-width: 100%;
+    }
+}

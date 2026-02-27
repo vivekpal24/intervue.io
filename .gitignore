@@ -1,0 +1,22 @@
+# Common ignores
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+coverage/
+
+# Sub-project specific (optional if they have their own, but safe to repeat)
+frontend/node_modules/
+frontend/dist/
+polling-system/node_modules/
+polling-system/dist/
+polling-system/build/

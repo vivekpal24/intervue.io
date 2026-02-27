@@ -1,0 +1,505 @@
+.student-poll-outer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3rem 1rem 5rem;
+    position: relative;
+}
+
+.student-poll-container {
+    width: 100%;
+    max-width: 620px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.my-4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mt-4 {
+    margin-top: 2rem;
+}
+
+.join-container {
+    max-width: 450px;
+}
+
+.join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.premium-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.premium-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.premium-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(96, 91, 255, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(96, 91, 255, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #D9D9D9;
+    color: #8B8B8B;
+    box-shadow: none;
+}
+
+.error-alert {
+    background: rgba(239, 68, 68, 0.15);
+    border-left: 4px solid var(--danger);
+    color: #fca5a5;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    animation: fadeUp 0.3s ease forwards;
+}
+
+/* Polling UI */
+.poll-interactive {
+    max-width: 700px;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-badge.live {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.status-badge.live::before {
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+}
+
+.status-badge.waiting {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+}
+
+.status-badge.waiting::before {
+    background: var(--warning);
+    box-shadow: 0 0 8px var(--warning);
+}
+
+.status-badge.offline {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+
+.status-badge.offline::before {
+    background: var(--danger);
+}
+
+.identity-badge {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    color: var(--text-secondary);
+}
+
+.poll-question-dark-box {
+    background: #595959;
+    padding: 1rem 1.5rem;
+    position: relative;
+    border-radius: 8px 8px 0 0;
+}
+
+.poll-question-text {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.countdown-text {
+    font-family: monospace;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.danger-pulse-text {
+    animation: flash-text 1s infinite alternate;
+}
+
+@keyframes flash-text {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.poll-option-card {
+    position: relative;
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+    color: var(--text-primary);
+}
+
+.circle-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #E9ECEF;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .status-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .status-header .status-badge {
+        order: -1;
+        /* Move status badge to top if stacked */
+    }
+
+    .poll-interactive {
+        padding: 0 1rem;
+    }
+
+    .join-container {
+        padding: 0 1rem;
+    }
+}
+
+.poll-option-card.selected .circle-index {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.option-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.option-text {
+    color: var(--text-primary);
+}
+
+.option-percentage {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.progress-bar-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent-primary);
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* In the figma design, progress text is white when overlapping the purple fill */
+.poll-option-card.result-mode .option-content {
+    mix-blend-mode: difference;
+    color: white;
+}
+
+.poll-option-card.result-mode .option-percentage {
+    color: white;
+}
+
+.my-vote-indicator {
+    position: absolute;
+    top: -1px;
+    right: 2rem;
+    background: var(--accent-primary);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0 0 8px 8px;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+}
+
+.results-summary {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Base structural classes pulled from TeacherPage */
+.poll-result-container {
+    border: 1px solid #E9ECEF;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.poll-question-dark-box {
+    background: #595959;
+    padding: 1.2rem 1.5rem;
+}
+
+.poll-question-text {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.poll-options-box {
+    padding: 1.5rem;
+}
+
+.poll-option-row {
+    position: relative;
+    border-radius: 6px;
+    background: #F8F9FA;
+    height: 48px;
+    overflow: hidden;
+    border: 1px solid #E9ECEF;
+    margin-bottom: 0.75rem;
+}
+
+.figma-bar-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+}
+
+.figma-bar-fill {
+    height: 100%;
+    background: #7765DA;
+    transition: width 0.5s ease-in-out;
+}
+
+.figma-option-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.white-text {
+    background: white !important;
+    color: #7765DA !important;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+/* Sidebar Overlay */
+.popover-panel {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    max-height: 600px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+    overflow: hidden;
+    border: 1px solid #E9ECEF;
+}
+
+.popover-tabs {
+    display: flex;
+    border-bottom: 1px solid #E9ECEF;
+    position: relative;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+.close-sidebar-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.popover-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-sidebar);
+}
+
+.chat-body .chat-panel {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    height: 100%;
+}
+
+.participants-table-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #E9ECEF;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    background: white;
+}
+
+.participants-list {
+    background: white;
+    flex: 1;
+}
+
+.participant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #F8F9FA;
+}
+
+.participant-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
