@@ -17,6 +17,6 @@ coverage/
 # Sub-project specific (optional if they have their own, but safe to repeat)
 frontend/node_modules/
 frontend/dist/
-polling-system/node_modules/
-polling-system/dist/
-polling-system/build/
+backend/node_modules/
+backend/dist/
+backend/build/
