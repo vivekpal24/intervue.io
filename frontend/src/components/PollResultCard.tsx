@@ -17,7 +17,7 @@ const PollResultCard: React.FC<PollResultCardProps> = ({ poll, timerBadge }) => 
 
     return (
         <div className="poll-result-container">
-            <div className="poll-question-dark-box" style={{ position: 'relative' }}>
+            <div className="poll-question-dark-box">
                 <h2 className="poll-question-text">{poll.question}</h2>
                 {timerBadge}
             </div>

@@ -171,8 +171,7 @@ const TeacherPage: React.FC = () => {
 
     // ─── Timer Badge for Active Poll ──────────────────────────────────
     const timerBadge = activePoll?.status === 'ACTIVE' ? (
-        <div className={`countdown-badge small ${timeLeftMs < 10000 ? 'danger-pulse' : ''}`}
-            style={{ position: 'absolute', right: '1rem', top: '1rem' }}>
+        <div className={`countdown-badge small ${timeLeftMs < 10000 ? 'danger-pulse' : ''}`}>
             ⏱️ {formattedTime}
         </div>
     ) : undefined;

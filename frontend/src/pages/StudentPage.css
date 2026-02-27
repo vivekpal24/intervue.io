@@ -343,6 +343,10 @@
 .poll-question-dark-box {
     background: #595959;
     padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 
 .poll-question-text {
@@ -350,6 +354,7 @@
     font-size: 1.1rem;
     font-weight: 500;
     margin: 0;
+    line-height: 1.4;
 }
 
 .poll-options-box {
