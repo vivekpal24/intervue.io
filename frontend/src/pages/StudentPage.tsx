@@ -27,7 +27,7 @@ const StudentPage: React.FC = () => {
     const { socket, connectionError } = useSocket('global_lobby', isJoined ? studentName : undefined);
     const { timeLeftMs, isExpired, formattedTime } = usePollTimer(serverEndTimeMs);
 
-    // ─── Restore session & fetch initial poll ─────────────────────────
+    // session and active poll
     useEffect(() => {
         const savedName = sessionStorage.getItem('studentName');
         if (savedName) setStudentName(savedName);
@@ -60,7 +60,7 @@ const StudentPage: React.FC = () => {
         fetchActivePoll();
     }, []);
 
-    // ─── Socket Listeners ─────────────────────────────────────────────
+    // handle real-time updates
     useEffect(() => {
         if (!socket) return;
 
@@ -125,7 +125,7 @@ const StudentPage: React.FC = () => {
         }
     }, [connectionError]);
 
-    // ─── Handlers ─────────────────────────────────────────────────────
+    // flow logic
     const handleJoin = (e: React.FormEvent) => {
         e.preventDefault();
         if (!studentName.trim()) { setErrorMsg('Please enter your name.'); return; }
@@ -149,7 +149,7 @@ const StudentPage: React.FC = () => {
         }
     };
 
-    // ─── Not Joined Yet ───────────────────────────────────────────────
+    // not joined lobby
     if (!isJoined) {
         if (isKicked) {
             return (
@@ -181,7 +181,7 @@ const StudentPage: React.FC = () => {
         );
     }
 
-    // ─── Main Poll View ───────────────────────────────────────────────
+    // poll state logic
     const showResults = activePoll ? (hasVoted || isExpired || activePoll.status === 'COMPLETED') : false;
 
     return (
@@ -275,7 +275,7 @@ const StudentPage: React.FC = () => {
                     </>
                 )}
 
-                {/* ── Sidebar Popover ── */}
+                {/* Sidebar */}
                 <SidebarPopover
                     socket={socket}
                     currentUser={studentName}

@@ -30,7 +30,7 @@ class PollService {
         if (!poll) throw new Error('Poll not found');
         if (poll.status !== 'DRAFT') throw new Error(`Cannot start poll from status: ${poll.status}`);
 
-        // Block if there's already another ACTIVE poll
+        // Check for other active polls
         const activePollExists = await Poll.exists({ status: 'ACTIVE' });
         if (activePollExists) {
             throw new Error('Another poll is already active. Wait for it to complete before starting this one.');

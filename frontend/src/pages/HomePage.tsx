@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
                             onClick={() => setSelectedRole('student')}
                         >
                             <h3>I'm a Student</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                            <p>Join live polls, submit your answers, and view group results in real-time.</p>
                         </div>
 
                         <div

@@ -23,7 +23,6 @@ const TeacherPage: React.FC = () => {
     const { socket } = useSocket('global_lobby');
     const { timeLeftMs, formattedTime } = usePollTimer(serverEndTimeMs);
 
-    // ─── Data Fetching ────────────────────────────────────────────────
     const fetchActivePoll = async () => {
         try {
             const res = await axios.get('/poll/active');
@@ -64,7 +63,7 @@ const TeacherPage: React.FC = () => {
         fetchParticipants();
     }, []);
 
-    // ─── Socket Listeners ─────────────────────────────────────────────
+    // Socket events
     useEffect(() => {
         if (!socket) return;
 
@@ -169,7 +168,6 @@ const TeacherPage: React.FC = () => {
         socket.emit('teacher:unkickStudent', { studentName });
     };
 
-    // ─── Timer Badge for Active Poll ──────────────────────────────────
     const timerBadge = activePoll?.status === 'ACTIVE' ? (
         <div className={`countdown-badge small ${timeLeftMs < 10000 ? 'danger-pulse' : ''}`}>
             ⏱️ {formattedTime}

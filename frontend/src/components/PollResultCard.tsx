@@ -7,10 +7,6 @@ interface PollResultCardProps {
     timerBadge?: React.ReactNode;
 }
 
-/**
- * Displays a poll question with its options as progress bar rows.
- * Used both on the Teacher active-poll view and the Poll History screens.
- */
 const PollResultCard: React.FC<PollResultCardProps> = ({ poll, timerBadge }) => {
     const options = poll?.options || [];
     const totalVotes = options.reduce((sum, opt) => sum + (opt.votes || 0), 0);

@@ -72,10 +72,10 @@ class VoteService {
     }
 
     async removeVote(pollId: string, studentName: string): Promise<boolean> {
-        // Find and delete the student's vote record
+        // remove student vote
         const vote = await Vote.findOneAndDelete({ pollId, studentName });
         if (!vote) {
-            return false; // Student hadn't voted
+            return false;
         }
 
         // Fetch the poll to find the matching option (could be text or _id)
@@ -92,7 +92,7 @@ class VoteService {
             }
         }
 
-        // Broadcast updated results in real time
+        // Sync results
         pollEvents.emit('vote_cast', { pollId, selectedOption: vote.selectedOption, studentName });
 
         return true;

@@ -139,22 +139,16 @@ export class PollSocketHandler {
 
             socket.on('teacher:kickStudent', async ({ studentName }) => {
                 try {
-                    // Perform kick in service and get socketID to kill
                     const targetSocketId = await kickStudent('global_lobby', studentName);
-
-                    // Alert the target student they were kicked explicitly
+                    // kill target student socket
                     this.io.to(targetSocketId).emit('kicked', { message: 'You have been removed by the teacher.' });
-
-                    // Forcefully disconnect that specific socket instance immediately
                     this.io.sockets.sockets.get(targetSocketId)?.disconnect(true);
 
-                    // Remove the student's vote from the active poll (if any)
+                    // clear their vote if active
                     const activePollId = await pollService.getActivePoll().then(p => p?.id);
                     if (activePollId) {
                         await voteService.removeVote(activePollId, studentName);
                     }
-
-                    // Broadcast the updated participant count to everyone else (like the Teacher panel)
                     await this.broadcastParticipantUpdate();
                 } catch (err: any) {
                     socket.emit('error', { message: err.message });

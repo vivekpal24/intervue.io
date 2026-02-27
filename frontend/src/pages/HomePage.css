@@ -1,18 +1,24 @@
 .home-wrapper {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Shifted from center to move content up */
     justify-content: center;
     background-color: var(--bg-main);
-    /* usually #F2F2F2 */
-    padding: 2rem;
+    padding: 8vh 2rem 2rem;
+    /* Added top padding for top-aligned layout */
 }
 
 .home-content {
     width: 100%;
     max-width: 900px;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem;
+    /* Reduced top padding */
     border-radius: 8px;
+}
+
+.mb-8 {
+    margin-bottom: 2.5rem;
 }
 
 .content-inner {

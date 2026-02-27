@@ -29,7 +29,7 @@ A powerful, high-fidelity real-time polling application designed for interactive
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/vivekpal24/intervue.io.git
    cd intervue.io
    ```
 
@@ -61,37 +61,50 @@ A powerful, high-fidelity real-time polling application designed for interactive
    ```
    *The app will run on `http://localhost:5173`.*
 
+## 🌐 Live Deployment
+
+- **Frontend**: [https://intervue-io-sand.vercel.app](https://intervue-io-sand.vercel.app)
+- **Backend API**: [https://intervue-io-7vac.onrender.com](https://intervue-io-7vac.onrender.com)
+
 ## ⚙️ Environment Variables
 
 ### Backend (`backend/.env`)
 ```env
 PORT=3000
-MONGODB_URI=mongodb://localhost:27017/polling_db
-CORS_ORIGIN=http://localhost:5173
+MONGODB_URI=mongodb+srv://... (or local)
+CORS_ORIGIN=https://intervue-io-sand.vercel.app
 ```
 
-### Frontend (`frontend/.env`)
+### Frontend (`frontend/.env` or Vercel Settings)
 ```env
-VITE_API_URL=http://localhost:3000
+VITE_API_URL=https://intervue-io-7vac.onrender.com
+VITE_SOCKET_URL=https://intervue-io-7vac.onrender.com
 ```
 
 ## 📂 Project Structure
 
 ```text
 intervue.io/
-├── frontend/             # Single Page Application (React + TS)
+├── frontend/             # React (TS) + Vite
+│   ├── vercel.json       # SPA routing fix for Vercel
 │   ├── src/
-│   │   ├── components/   # Reusable UI elements
-│   │   ├── pages/        # Main route containers (Teacher/Student/Home)
-│   │   └── hooks/        # Custom React hooks (Socket, Timer)
-├── backend/              # API & Socket Server (Node.js)
+│   │   ├── components/   # Floating Sidebar, Result Cards, etc.
+│   │   ├── pages/        # HomePage, TeacherPage, StudentPage
+│   │   └── hooks/        # socket.io hooks, countdown timers
+├── backend/              # Node.js + Express + Socket.io
 │   ├── src/
-│   │   ├── services/     # Core business logic
-│   │   ├── socket/       # Socket.io handlers
-│   │   ├── controllers/  # API route handlers
-│   │   └── models/        # Database schemas
+│   │   ├── services/     # Business logic (Poll, Vote, Participants)
+│   │   ├── socket/       # Real-time event orchestration
+│   │   └── controllers/  # REST API handlers
 ```
 
-## 🌐 Deployment
+## ✨ Recent Refinements
 
-For instructions on how to go live using **Render** and **Vercel**, please refer to the [Deployment Guide](./deployment_guide.md) (if available) or follow the standard practices for Node/React apps.
+- **SPA Routing**: Added `vercel.json` to handle 404 errors on page refresh.
+- **Smart Timer**: Moved the active poll timer from absolute positioning to an inline flex layout for better readability.
+- **Floating Sidebar**: Integrated Chat and Participant management into a unified floating popover (FAB).
+- **CORS Resolution**: Implemented robust origin whitelisting to support credentialed requests from Vercel.
+
+## 📄 License
+
+MIT

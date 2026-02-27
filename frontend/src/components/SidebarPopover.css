@@ -157,7 +157,7 @@
 
 @media (max-width: 768px) {
     .popover-panel {
-        width: 100%;
+        width: 90%;
         height: 60vh;
         bottom: 0;
         right: 0;
