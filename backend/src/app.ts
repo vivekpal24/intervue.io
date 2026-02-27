@@ -42,6 +42,10 @@ app.use((req, res, next) => {
 app.use('/poll', pollRoutes);
 app.use('/vote', voteRoutes);
 
+app.get('/', (req, res) => {
+    res.status(200).json({ status: 'active', info: 'Intervue Poll API' });
+});
+
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
